@@ -39,6 +39,7 @@ public class Venda implements Serializable {
     
     @Column(nullable=false,length=50)
     @ManyToOne(cascade= CascadeType.MERGE,fetch= FetchType.EAGER)
+    @JoinColumn(name="pessoa")
     private Pessoa cliente;  
     
     @Column(nullable=false,length=50)
