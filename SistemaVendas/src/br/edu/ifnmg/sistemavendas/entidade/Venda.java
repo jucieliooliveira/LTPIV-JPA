@@ -7,13 +7,18 @@ package br.edu.ifnmg.sistemavendas.entidade;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 /**
@@ -21,19 +26,24 @@ import javax.persistence.Temporal;
  * @author JUCIELIO
  */
 @Entity
+@Table(name="Vendas")
 public class Venda implements Serializable {
-    private static final long serialVersionUID = 1L;
+   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     @Column(nullable=false,length=50)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataVenda;
+    
     @Column(nullable=false,length=50)
-    @ManyToOne
-    private Pessoa cliente;    
+    @ManyToOne(cascade= CascadeType.MERGE,fetch= FetchType.EAGER)
+    private Pessoa cliente;  
+    
     @Column(nullable=false,length=50)
-    @OneToMany
+    @OneToMany (cascade= CascadeType.ALL,fetch= FetchType.LAZY)
+    @JoinColumn(name="venda")
     private List<Produto> itens;
     
     public Long getId() {
