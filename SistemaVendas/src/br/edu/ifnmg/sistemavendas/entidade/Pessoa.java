@@ -8,9 +8,11 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import org.eclipse.persistence.internal.platform.database.oracle.TIMESTAMPTypes;
@@ -26,13 +28,10 @@ public class Pessoa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     @Column(nullable=false,length=50)
     private  String  nome;    
-    @Column(nullable=false,length=10)
-    @Temporal(javax.persistence.TemporalType.DATE)    
-    private  Date aniversario;
-            
-
+         
     public Long getId() {
         return id;
     }
@@ -49,13 +48,7 @@ public class Pessoa implements Serializable {
         this.nome = nome;
     }
 
-    public Date getAniversario() {
-        return aniversario;
-    }
 
-    public void setAniversario(Date aniversario) {
-        this.aniversario = aniversario;
-    }
 
     @Override
     public int hashCode() {
@@ -79,7 +72,8 @@ public class Pessoa implements Serializable {
 
     @Override
     public String toString() {
-        return "br.edu.ifnmg.sistemavendas.entidade.Pessoa[ id=" + id + " ]";
+        //return "br.edu.ifnmg.sistemavendas.entidade.Pessoa[ id=" + id + " ]";
+        return nome;
     }
     
 }
