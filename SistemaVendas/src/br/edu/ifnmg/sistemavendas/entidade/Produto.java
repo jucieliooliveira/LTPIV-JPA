@@ -23,11 +23,31 @@ public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
      private Long id;
+    
     @Column(nullable=false,length=50)
     private String nome;
-    @Column(nullable=false)
+    
+    @Column(nullable=false,scale=0, precision=2)
     private Double valor;    
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    
+    
     public Long getId() {
         return id;
     }
@@ -58,7 +78,7 @@ public class Produto implements Serializable {
 
     @Override
     public String toString() {
-        return "br.edu.ifnmg.sistemavendas.entidade.Produto[ id=" + id + " ]";
+        return nome;
     }
     
 }

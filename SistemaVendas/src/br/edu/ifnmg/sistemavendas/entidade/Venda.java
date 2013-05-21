@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -6,6 +7,7 @@ package br.edu.ifnmg.sistemavendas.entidade;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,25 +29,41 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name="Vendas")
-public class Venda implements Serializable {
-   
+public class Venda implements Serializable {   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @Column(nullable=false,length=50)
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataVenda;
     
     @Column(nullable=false,length=50)
-    @ManyToOne(cascade= CascadeType.MERGE,fetch= FetchType.EAGER)
-    @JoinColumn(name="pessoa")
+    @ManyToOne(fetch= FetchType.EAGER)
+    @JoinColumn(name="cliente")
     private Pessoa cliente;  
     
     @Column(nullable=false,length=50)
-    @OneToMany (cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    @JoinColumn(name="venda")
-    private List<Produto> itens;
+    @OneToMany (cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy="venda")
+    private List<ItemVenda> itens;
+    
+    // criar lista vazia
+    public Venda(){
+        itens = new LinkedList<>();
+    }
+    
+    // Adicionar Produtos 
+    public void add(ItemVenda item){
+        if (!itens.contains(item));
+         item.setVenda(this);
+         itens.add(item);
+    }
+    
+    // Remover  Produtos 
+    public void remove(ItemVenda item){
+        if (!itens.contains(item));
+         itens.remove(item);
+    }    
     
     public Long getId() {
         return id;
@@ -54,6 +72,32 @@ public class Venda implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Date getDataVenda() {
+        return dataVenda;
+    }
+
+    public void setDataVenda(Date dataVenda) {
+        this.dataVenda = dataVenda;
+    }
+
+    public Pessoa getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Pessoa cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<ItemVenda> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemVenda> itens) {
+        this.itens = itens;
+    }
+    
+    
 
     @Override
     public int hashCode() {

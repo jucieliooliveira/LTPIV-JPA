@@ -7,6 +7,7 @@ package br.edu.ifnmg.sistemavendas.entidade;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,14 +27,15 @@ public class ItemVenda implements Serializable {
     private Long id;
     @Column (nullable=false)
     
-    @ManyToOne
+    @ManyToOne(fetch= FetchType.LAZY)
     private Venda venda ;
     @Column (nullable=false)
     
-    @ManyToOne
+    @ManyToOne(fetch= FetchType.EAGER)
     private Produto produto ;
+    
     @Column (nullable=false)
-    private Long quantidade;
+    private Integer quantidade;
 
     public Long getId() {
         return id;
@@ -59,13 +61,15 @@ public class ItemVenda implements Serializable {
         this.produto = produto;
     }
 
-    public Long getQuantidade() {
+    public Integer getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(Long quantidade) {
+    public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
+
+
     
 
     @Override
