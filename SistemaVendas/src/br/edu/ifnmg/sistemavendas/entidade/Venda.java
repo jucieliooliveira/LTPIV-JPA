@@ -17,7 +17,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -38,12 +37,10 @@ public class Venda implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataVenda;
     
-    @Column(nullable=false,length=50)
     @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name="cliente")
     private Pessoa cliente;  
     
-    @Column(nullable=false,length=50)
     @OneToMany (cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy="venda")
     private List<ItemVenda> itens;
     

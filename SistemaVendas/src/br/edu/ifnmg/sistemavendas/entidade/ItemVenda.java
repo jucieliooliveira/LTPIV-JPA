@@ -5,6 +5,7 @@
 package br.edu.ifnmg.sistemavendas.entidade;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,11 +26,11 @@ public class ItemVenda implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column (nullable=false)
+
     
     @ManyToOne(fetch= FetchType.LAZY)
     private Venda venda ;
-    @Column (nullable=false)
+
     
     @ManyToOne(fetch= FetchType.EAGER)
     private Produto produto ;
@@ -69,28 +70,36 @@ public class ItemVenda implements Serializable {
         this.quantidade = quantidade;
     }
 
-
-    
-
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.venda);
+        hash = 41 * hash + Objects.hashCode(this.produto);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ItemVenda)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        ItemVenda other = (ItemVenda) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ItemVenda other = (ItemVenda) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.venda, other.venda)) {
+            return false;
+        }
+        if (!Objects.equals(this.produto, other.produto)) {
             return false;
         }
         return true;
     }
+
 
     @Override
     public String toString() {
