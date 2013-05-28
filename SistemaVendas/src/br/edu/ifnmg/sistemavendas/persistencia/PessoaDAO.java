@@ -21,7 +21,7 @@ public class PessoaDAO {
     
   public  PessoaDAO () {
       EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("SistemaVendasPU");
-      EntityManager manager = fabrica.createEntityManager();
+      manager = fabrica.createEntityManager();
   
   }  
     
@@ -54,7 +54,7 @@ public class PessoaDAO {
   }
   
   public List<Pessoa> Busca(int inicio,int qtd){
-      Query consulta = (Query) manager.createQuery("select p from p  "
+      Query consulta = (Query) manager.createQuery("select p from Pessoa p  "
               + "order by p.nome");
       consulta.setFirstResult(inicio);
       consulta.setMaxResults(qtd);

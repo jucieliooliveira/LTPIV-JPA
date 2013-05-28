@@ -20,7 +20,7 @@ public class ProdutoDAO {
     
   public  ProdutoDAO () {
       EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("SistemaVendasPU");
-      EntityManager manager = fabrica.createEntityManager();
+       manager = fabrica.createEntityManager();
   
   }  
     
@@ -53,7 +53,7 @@ public class ProdutoDAO {
   }
   
   public List<Produto> Busca(int inicio,int qtd){
-      Query consulta = (Query) manager.createQuery("select p from p  "
+      Query consulta = (Query) manager.createQuery("select p from Produto p  "
               + "order by p.nome");
       consulta.setFirstResult(inicio);
       consulta.setMaxResults(qtd);

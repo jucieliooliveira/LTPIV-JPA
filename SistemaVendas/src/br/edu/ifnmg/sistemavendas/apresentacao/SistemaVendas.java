@@ -31,49 +31,18 @@ public class SistemaVendas {
         // TODO code application logic here     
         PessoaDAO dao = new PessoaDAO();
         
-        Pessoa teste = new Pessoa();
-        teste.setNome("Pessoa1");
         
-        dao.Salvar(teste);
+        // Inserir dados 
+         for(int i=1;i<=20;i++){    
+            Pessoa teste = new Pessoa();
+            teste.setNome("Cliente "+i);
+            // Salvar dados 
+            dao.Salvar(teste);
+         }
+        
+        // Listar dados 
         for (Pessoa p : dao.Busca(0, 1000)){
             System.out.println(p);
-        }
-        
-        
-        
-        
-      /*     
-      Pessoa p = new Pessoa();
-      p.setNome("Jucielio");
-      
-      EntityTransaction tran = manager.getTransaction();
-        tran.begin();
-            manager.persist(p);
-        tran.commit() ; 
-      Query consulta = manager.createQuery("select p from Pessoa p ");             
-        //consulta.setFirstResult(9); // n primeiros registrsos 
-        consulta.setMaxResults(3); //quantiades de regitros  a serem exixbidos   
-        List<Pessoa>  lista = consulta.getResultList();      
-      for (Pessoa p: lista){
-          System.out.println(p);
-      } 
-        
-      
-      Query consulta = manager.createQuery("select p from Produto p "
-              + "where p.preco < :preco"
-              + "order by p.nome" );             
-      
-        consulta.setFirstResult(3); // n primeiros registrsos 
-        consulta.setMaxResults(3); //quantiades de regitros  a serem exixbidos   
-        consulta.setParameter("preco", 10); 
-        
-        List<Produto>  lista = consulta.getResultList();              
-            for (Produto p: lista){
-                System.out.println(p);
-            }     
-      
-      */
-      
-      
-    }
+        } 
+    } 
 }

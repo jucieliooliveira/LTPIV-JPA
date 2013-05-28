@@ -22,7 +22,7 @@ public class VendaDAO {
     
   public  VendaDAO () {
       EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("SistemaVendasPU");
-      EntityManager manager = fabrica.createEntityManager();
+       manager = fabrica.createEntityManager();
   
   }  
     
@@ -55,7 +55,7 @@ public class VendaDAO {
   }
   
   public List<Venda> Busca(int inicio,int qtd){
-      Query consulta = (Query) manager.createQuery("select V from v  "
+      Query consulta = (Query) manager.createQuery("select v from Venda v  "
               + "order by p.nome");
       consulta.setFirstResult(inicio);
       consulta.setMaxResults(qtd);
